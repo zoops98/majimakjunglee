@@ -958,7 +958,7 @@
       throw new Error('Gemini API 키가 설정되지 않았습니다. 우측 상단 [설정]에서 키를 입력해주세요.');
     }
 
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
     const body = {
       contents: [{
         role: 'user',
@@ -976,7 +976,7 @@
       try {
         const res = await fetch(url, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey.trim() },
           body: JSON.stringify(body)
         });
         if (!res.ok) {
